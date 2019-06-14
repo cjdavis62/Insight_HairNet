@@ -1,0 +1,57 @@
+<style>
+
+ .main {
+ background-color: rgba(255, 255, 255, 0.5);
+ margin-top: 100px;
+ padding-bottom: 50px;
+ }
+ .main h1 {
+ font-size: 3.5em;
+ font-family: Arial;
+ color: #2E3759;
+ }
+ .main h2 {
+ font-size: 2em;
+ font-family: Arial;
+ color: #2E3759;
+ }
+ .main h3 {
+ font-size: 2em;
+ font-family: Arial;
+ color: #2E3759;
+ }
+ .main p {
+ font-size:1em;
+ font-family: Arial;
+ color: #2E3759;
+ }
+
+</style>
+
+
+<title>Hair Salon Recommendation</title>
+</head>
+<body>
+<div class="main">
+  <div style="text-align:center">
+  <br><br>
+  <div class="starter-template">
+
+<h3>You picked {{salon}}!</h3>
+<br>
+<h3>Your hair type is {{hair_type}}</h3>
+
+<br>
+<h3>Here is a photo of blonde hair from a salon in Austin</h3>
+
+ <img src="{{salon_photo_path}}" alt="Blonde_photo" height="240" width="240">
+
+<h4>at {{salon_photo_confidence}}% confidence from <a href = "https://www.instagram.com/ritualsalonatx/">ritualsalonatx </a> </h4>
+
+<h3>Here is a {{sentimentA}} review from your salon choice:</h3>
+<p>{{reviewA}}</p>
+<h3>Here is a {{sentimentB}} review from your salon choice:</h3>
+<p>{{reviewB}}</p>
+
+</div></div></div>
+</body>

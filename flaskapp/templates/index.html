@@ -1,0 +1,76 @@
+<!-- A really basic homepage. You may want to look at Bootstrap CSS examples to customize your own app! -->
+
+<!-- your CSS goes between <style> </style> -->
+<style>
+
+ .main {
+ background-color: rgba(255, 255, 255, 0.5);
+ margin-top: 100px;
+ padding-bottom: 50px;
+ }
+ .main h1 {
+ font-size: 3.5em;
+ font-family: Arial;
+ color: #2E3759;
+ }
+ .main h2 {
+ font-size: 2em;
+ font-family: Arial;
+ color: #2E3759;
+ }
+ .main h3 {
+ font-size: 2em;
+ font-family: Arial;
+ color: #2E3759;
+ }
+ .main p {
+ font-size:1em;
+ font-family: Arial;
+ color: #2E3759;
+ }
+
+</style>
+
+
+
+<div class="overlay">
+
+</div>
+
+
+<title>HairNet</title>
+</head>
+<body>
+    <div class="main">
+      <div style="text-align:center">
+      <br><br><br>
+      <div class="starter-template">
+        <h1>HairNet</h1>
+          <h2>"Never comb through reviews and Instagram again!"</h2>
+      </div>
+      <br><br><br>
+      <div class='buttons'>
+
+
+      <div ><h3>What is your current/desired hair color?</h3></div>
+      <form action='/recommendations', method='POST'>
+      <select name="hair_type" id="hair_type" class="selectpicker form-control">
+          <option value="hair_blonde">blonde</option>
+          <option value="hair_brunette">brunette</option>
+      </select>
+
+      <br><br>      <br><br>       <br><br>
+
+
+      <br><br>      <br><br>       <br><br>
+
+
+      <!-- This is what takes you to my next page recommender.html -->
+      Salon Name: <input type="text" name="salon_name">
+      <input type="submit">
+        </form>
+
+
+    </div>
+    </div>
+  </body>
