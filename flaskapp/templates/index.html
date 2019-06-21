@@ -11,7 +11,7 @@
 
  .main {
  background-color: rgba(255, 255, 255, 0.5);
- margin-top: 100px;
+ margin-top: 0px;
  padding-bottom: 50px;
  }
  .main h1 {
@@ -39,7 +39,7 @@
    background-image: url('/static/salon_bkg.jpg');
 
    /* Full height */
-   height: 30%;
+   height: 20%;
 
    /* Create the parallax scrolling effect */
    /*background-attachment: fixed; */
@@ -47,6 +47,26 @@
    background-repeat: no-repeat;
    background-size: cover;
 }
+
+
+.button {
+  background-color: #555555;
+  border: groove;
+  border-color: black;
+  color: white;
+  padding: 15px 30px 15px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: auto;
+  opacity: 0.9;
+  transition: 0.3s
+}
+
+.button:hover {opacity: 1}
+
+
 </style>
 
 
@@ -70,34 +90,32 @@
       <br>
       <div class="parallax"> </div>
 
-      <div class='buttons'>
-
-
-      <div ><h3>What is your current/desired hair color?</h3></div>
+      <h3>What is your current/desired hair color?</h3>
       <form action='/recommendations', method='POST'>
-      <select name="hair_type" id="hair_type" class="selectpicker form-control">
+        <div class='button'>
+      <select name="hair_type" id="hair_type" class="selectpicker form-control" size = "1">
           <option value="blonde">blonde</option>
           <option value="brunette">brunette</option>
           <option value="black">black</option>
           <option value="red">red</option>
           <option value="colored">colored</option>
-
       </select>
+    </div>
 
-      <br><br>
+
+      <br><br><br>
 
 
-      <br><br>    
+
 
 
       <!-- This is what takes you to my next page recommender.html -->
-      <div ><h3>What is something you want from the salon?</h3></div>
-      <input type="text" name="product">
-      <input type="submit">
-        </form>
+      <h3>What is something you want from the salon?</h3>
+      <div class = "button"><input type="text" name="product" size = "20">
+      <input type="submit" value="Comb the HairNet!"> </div>
+      </form>
 
 
-    </div>
     </div>
 
 
