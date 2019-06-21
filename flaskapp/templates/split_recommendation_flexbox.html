@@ -56,6 +56,7 @@ footer {
   color: white;
 }
 
+
 /* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
 @media (max-width: 300px) {
   section {
@@ -65,18 +66,38 @@ footer {
 }
 
 img {
-  display: block;
+  display: inline-flex;
   margin-left: auto;
   margin-right: auto;
   max-width: 100%;
   height: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+
 }
 
 img:hover {
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
 
+div.polaroid {
+  text-align: center;
+  width: auto;
+  background-color: inherit;
+  /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+  margin-bottom: 25px;
+  margin-left: 33%;
+  margin-right: 33%;
+}
 
+div.container {
+  text-align: center;
+  padding: 2px 0px 10px;
+  color: black;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
 
 </style>
 </head>
@@ -96,7 +117,10 @@ img:hover {
   <nav>
 <h3 style="text-align:center">Here are the highest ranked salons!</h3>
 {% if (1 in show_photo_data) %}
-<h6 style="text-align:center">Click the photo(s) to find the instagram page for the salon!</h6>
+<h5 style="text-align:center">Each salon is scored based on its reviews regarding what you want</h5>
+<h5 style="text-align:center">Click the photos to find the Instagram page for the salon!</h5>
+
+
 {% endif %}
 
 
@@ -117,10 +141,13 @@ img:hover {
       <br>
     {%endfor%}
     </ul>
+
     {% if show_photo_data[0] %}
+    <div class="polaroid">
     <a target="_blank" href="https://www.instagram.com/{{salon_highest_data[8]}}">
     <img src="{{salon_highest_data[6]}}" alt="photo of hair type" height="240" width="240">
     </a>
+    </div>
     {% endif %}
 
 
@@ -139,9 +166,11 @@ img:hover {
     </ul>
 
     {% if show_photo_data[1] %}
+    <div class="polaroid">
     <a target="_blank" href="https://www.instagram.com/{{salon_second_highest_data[8]}}">
     <img src="{{salon_second_highest_data[6]}}" alt="photo of hair type" height="240" width="240">
     </a>
+    </div>
     {% endif %}
 
     <h2><center><font color="#cd7f32">{{salon_third_highest_data[0] + " -- Score: " + salon_third_highest_data[2]|string}}</font></center></h2>
@@ -159,15 +188,31 @@ img:hover {
     </ul>
 
     {% if show_photo_data[2] %}
+    <div class="polaroid">
     <a target="_blank" href="https://www.instagram.com/{{salon_third_highest_data[8]}}">
     <img src="{{salon_third_highest_data[6]}}" alt="photo of hair type" height="240" width="240">
     </a>
+    </div>
     {% endif %}
 
   </article>
 </section>
 
 <footer>
+  <h3 style="text-align:center">In case none of the top salons matched with images, here are some other results!</h3>
+
+  {%for (location, name, salon_name, score) in end_photo_list %}
+  <div class="polaroid">
+    <a target="_blank" href="https://www.instagram.com/{{name}}">
+      <img src="{{location}}" alt="photo of hair type" height="240" width="240">
+    </a>
+    <div class="container">
+      <p>{{salon_name + " -- Score: " + score|string}}</p>
+    </div>
+  </div>
+
+  {%endfor%}
+
 </footer>
 
 </body>

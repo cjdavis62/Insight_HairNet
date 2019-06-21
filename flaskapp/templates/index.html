@@ -3,6 +3,12 @@
 <!-- your CSS goes between <style> </style> -->
 <style>
 
+
+  body, html {
+    height: 100%;
+  }
+
+
  .main {
  background-color: rgba(255, 255, 255, 0.5);
  margin-top: 100px;
@@ -15,7 +21,6 @@
  }
  .main h2 {
  font-size: 2em;
- font-family: Arial;
  color: #2E3759;
  }
  .main h3 {
@@ -29,6 +34,19 @@
  color: #2E3759;
  }
 
+.parallax{
+   /* The image used */
+   background-image: url('/static/salon_bkg.jpg');
+
+   /* Full height */
+   height: 30%;
+
+   /* Create the parallax scrolling effect */
+   /*background-attachment: fixed; */
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+}
 </style>
 
 
@@ -40,7 +58,8 @@
 
 <title>HairNet</title>
 </head>
-<body>
+   <body>
+
     <div class="main">
       <div style="text-align:center">
       <br><br><br>
@@ -48,7 +67,9 @@
         <h1>HairNet</h1>
           <h2>"Never comb through reviews and Instagram again!"</h2>
       </div>
-      <br><br><br>
+      <br>
+      <div class="parallax"> </div>
+
       <div class='buttons'>
 
 
@@ -63,10 +84,10 @@
 
       </select>
 
-      <br><br>      <br><br>       <br><br>
+      <br><br>
 
 
-      <br><br>      <br><br>       <br><br>
+      <br><br>    
 
 
       <!-- This is what takes you to my next page recommender.html -->
@@ -78,4 +99,10 @@
 
     </div>
     </div>
+
+
+
+    </div>
+
+
   </body>

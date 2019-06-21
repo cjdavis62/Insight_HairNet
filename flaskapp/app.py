@@ -265,10 +265,38 @@ def recommendations():
         salon_third_highest_data.extend(salon_hair_photos_highest_data)
 
 
+
+    #### Nearly done!!! ####
+    # To deal with case 0, where things are bad and there are no photos, have to rely on other photos to supplement!
+    # Look at all the photos that satisfy the color requirement, and take those to show, based on rankings
+
+    sorted_merged_salon_insta_good_score = sorted_merged_salon_insta_hair_type[sorted_merged_salon_insta_hair_type.confidence >= 0.8]
+    end_photo_list = []
+    min_photos = 10
+    # make more photos if in case 4 because that is when life is bad
+    if (case == 4):
+        min_photos = 15
+    number_of_photos = min(min_photos, sorted_merged_salon_insta_good_score.shape[0])
+    indices = np.random.choice(sorted_merged_salon_insta_good_score.shape[0], size = number_of_photos, replace = False)
+    for index in indices:
+        photo_information = []
+        photo_name = sorted_merged_salon_insta_good_score.iloc[index][0]
+        photo_location = "/static/img/" + sorted_merged_salon_insta_good_score.iloc[index][2] + "/" + photo_name
+        instagram_name = sorted_merged_salon_insta_good_score.iloc[index][2]
+        salon_name = sorted_merged_salon_insta_good_score.iloc[index][3]
+        score = "{0:0.1f}".format(sorted_merged_salon_insta_good_score.iloc[index][13] * 100.0)
+        photo_information.extend((photo_location, instagram_name, salon_name, score))
+        end_photo_list.append(photo_information)
+    # sort the list properly
+    def takeFourth(elem):
+        return elem[3]
+    end_photo_list.sort(key=takeFourth, reverse=True)
+
     #return the next page for the next step
     return render_template('split_recommendation_flexbox.html', hair_type = hair_type, keyword = keyword,
                            salon_highest_data = salon_highest_data, salon_second_highest_data = salon_second_highest_data, salon_third_highest_data = salon_third_highest_data,
-                           show_photo_data = show_photo_data, show_highest_services = show_highest_services, show_second_highest_services = show_second_highest_services)
+                           show_photo_data = show_photo_data, show_highest_services = show_highest_services, show_second_highest_services = show_second_highest_services,
+                           end_photo_list = end_photo_list)
 
 
 if __name__ == '__main__':
