@@ -55,8 +55,12 @@
       <div ><h3>What is your current/desired hair color?</h3></div>
       <form action='/recommendations', method='POST'>
       <select name="hair_type" id="hair_type" class="selectpicker form-control">
-          <option value="hair_blonde">blonde</option>
-          <option value="hair_brunette">brunette</option>
+          <option value="blonde">blonde</option>
+          <option value="brunette">brunette</option>
+          <option value="black">black</option>
+          <option value="red">red</option>
+          <option value="colored">colored</option>
+
       </select>
 
       <br><br>      <br><br>       <br><br>
@@ -66,7 +70,8 @@
 
 
       <!-- This is what takes you to my next page recommender.html -->
-      Salon Name: <input type="text" name="salon_name">
+      <div ><h3>What is something you want from the salon?</h3></div>
+      <input type="text" name="product">
       <input type="submit">
         </form>
 

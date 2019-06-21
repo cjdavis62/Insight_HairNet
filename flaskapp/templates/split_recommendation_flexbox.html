@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>HairNet Recommendation</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the header */
+header {
+  background-color: #666;
+  padding: 1px;
+  text-align: center;
+  font-size: 24px;
+  color: white;
+}
+
+/* Container for flexboxes */
+section {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+
+/* Style the navigation menu */
+nav {
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 2;
+  background: #ccc;
+  padding: 1px;
+}
+
+/* Style the content */
+article {
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 2;
+  background-color: #f1f1f1;
+  padding: 10px;
+}
+
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+/* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
+@media (max-width: 300px) {
+  section {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+img:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+
+
+</style>
+</head>
+
+
+<body>
+
+<!-- <h2>CSS Layout Float</h2>
+<p>In this example, we have created a header, two columns/boxes and a footer. On smaller screens, the columns will stack on top of each other.</p>
+<p>Resize the browser window to see the responsive effect (you will learn more about this in our next chapter - HTML Responsive.)</p>
+-->
+<header>
+  <h2>{{"Searched salons in Austin, TX for " + hair_type + " hair and '" + keyword + "'"}}</h2>
+</header>
+
+<section>
+  <nav>
+<h3 style="text-align:center">Here are the highest ranked salons!</h3>
+{% if (1 in show_photo_data) %}
+<h6 style="text-align:center">Click the photo(s) to find the instagram page for the salon!</h6>
+{% endif %}
+
+
+  </nav>
+
+  <article>
+
+    <h2><center><font color="#D4AF37"> {{salon_highest_data[0] + " -- Score: " + salon_highest_data[2]|string}}</font></center></h2>
+    <p style="text-align:center">{{"Address: " + salon_highest_data[3] + " -- Yelp Rating: " + salon_highest_data[4] + " stars"}}
+    {% if show_highest_services %}
+    <p>{{"Services: " + salon_highest_data[5]}}</p>
+    {% endif %}
+    </p>
+    <p>{{"Some reviews matching '" + keyword + "':"}}</p>
+    <ul style="list-style-type:circle;">
+    {%for i in range(0, [((salon_highest_data[1])|length()), 3]|min)%}
+      <li>{{salon_highest_data[1][i]}}
+      <br>
+    {%endfor%}
+    </ul>
+    {% if show_photo_data[0] %}
+    <a target="_blank" href="https://www.instagram.com/{{salon_highest_data[8]}}">
+    <img src="{{salon_highest_data[6]}}" alt="photo of hair type" height="240" width="240">
+    </a>
+    {% endif %}
+
+
+    <h2><center><font color="#48D1CC">{{salon_second_highest_data[0] + " -- Score: " + salon_second_highest_data[2]|string}}</font></center></h2>
+    <p style="text-align:center">{{"Address: " + salon_second_highest_data[3] + " -- Yelp Rating: " + salon_second_highest_data[4] + " stars"}}
+    {% if show_second_highest_services %}
+    <p>{{"Services: " + salon_second_highest_data[5]}}</p>
+    {% endif %}
+    </p>
+    <p>{{"Some reviews matching '" + keyword + "':"}}</p>
+    <ul style="list-style-type:circle;">
+    {%for i in range(0, [((salon_second_highest_data[1])|length()), 3]|min)%}
+      <li>{{salon_second_highest_data[1][i]}}
+      <br>
+    {%endfor%}
+    </ul>
+
+    {% if show_photo_data[1] %}
+    <a target="_blank" href="https://www.instagram.com/{{salon_second_highest_data[8]}}">
+    <img src="{{salon_second_highest_data[6]}}" alt="photo of hair type" height="240" width="240">
+    </a>
+    {% endif %}
+
+    <h2><center><font color="#cd7f32">{{salon_third_highest_data[0] + " -- Score: " + salon_third_highest_data[2]|string}}</font></center></h2>
+    <p style="text-align:center">{{"Address: " + salon_third_highest_data[3] + " -- Yelp Rating: " + salon_third_highest_data[4] + " stars"}}
+    {% if show_third_highest_services %}
+    <p>{{"Services: " + salon_third_highest_data[5]}}</p>
+    {% endif %}
+    </p>
+    <p>{{"Some reviews matching '" + keyword + "':"}}</p>
+    <ul style="list-style-type:circle;">
+    {%for i in range(0, [((salon_third_highest_data[1])|length()), 3]|min)%}
+      <li>{{salon_third_highest_data[1][i]}}
+      <br>
+    {%endfor%}
+    </ul>
+
+    {% if show_photo_data[2] %}
+    <a target="_blank" href="https://www.instagram.com/{{salon_third_highest_data[8]}}">
+    <img src="{{salon_third_highest_data[6]}}" alt="photo of hair type" height="240" width="240">
+    </a>
+    {% endif %}
+
+  </article>
+</section>
+
+<footer>
+</footer>
+
+</body>
+</html>
