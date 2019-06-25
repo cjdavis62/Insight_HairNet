@@ -168,11 +168,22 @@ def recommendations():
     list_of_instagram_names=["urbanbettysalon", "methodhair", "redstellasalon", "topazsalonaustin", "garboasalon", "frenchysbeauty",
                              "blackorchidsalon", "cnnhairteam", "acessalon", "benjaminbeausalon", "vainaustin", "loveandrootssalon", "wildorchidatx",
                              "salonsovayatx", "thesalonatthedomain", "ritualsalonatx", "bellasalonatx", "milkandhoneysalon", "pathsalon", "waterstone_salon"]
+    list_of_instagram_names.extend(("wetsalon", "l7salon",
+                           "shagaustin", "karusalonatx",
+                           "salon_vela", "spoletisalon",
+                           "birdsbarbershop", 'massagesway',
+                           'floyds99barbershop', 'ruiz_salon',
+                           'dolcesalonaustin', 'tanyafarishair',
+                           'urbanhairatx'))
 
     list_of_salons_titles_from_insta = ['Urban Betty', 'Method.Hair', 'Red Stella Hair Salon', 'Topaz Salon', 'Garbo A Salon and Spa',
                                         "Frenchy's Beauty Parlor", 'Black Orchid Salon', 'CNN Hair Team Salon', 'Chuck Edwards The Salon',
                                         'Benjamin Beau Salon', 'Vain', 'Love + Roots', 'Wild Orchid Salon', 'Salon Sovay', 'The Salon at The Domain',
                                         'Ritual Salon', 'Bella Salon', 'SALON by milk + honey', 'Path Salon', 'WaterStone Salon']
+    list_of_salons_titles_from_insta.extend(("Wet Salon and Studio", 'L7 Salon', "Shag Hair Salon", "Karu Salon", 'Salon Vela', 'Spoleti Salon',
+                                             'Birds Barbershop', 'Massage Sway', "Floyd's 99 Barbershop", 'Ruiz Salon', 'Dolce',
+                                             'Hair by Tanya Faris', "Urban Hair"))
+
 
     # Get the salons that have instagram accounts that I've been able to find
     sorted_review_data["in_insta"] = sorted_review_data.Title.isin(list_of_salons_titles_from_insta)
@@ -233,7 +244,7 @@ def recommendations():
 
 
 
-
+    '''
     # now combine the three sets of information! This has a few different scenarios.
     # case 1: If the first photo set matches the first salon set, then all 3 match one-to-one
     # case 2: If the first photo set matches the second salon set, then just 2 match
@@ -263,8 +274,21 @@ def recommendations():
     if (case == 3):
         show_photo_data = [0,0,1]
         salon_third_highest_data.extend(salon_hair_photos_highest_data)
+        '''
 
+    ### Fix to cases ###
+    show_photo_data = [0,0,0]
 
+    salon_names = [salon_highest, salon_second_highest, salon_third_highest]
+    salon_photos_names = [salon_hair_photos_highest_name, salon_hair_photos_second_highest_name, salon_hair_photos_third_highest_name]
+    salon_datas = [salon_highest_data, salon_second_highest_data, salon_third_highest_data]
+    salon_photos_datas = [salon_hair_photos_highest_data, salon_hair_photos_second_highest_data, salon_hair_photos_third_highest_data]
+
+    for i in range(len(salon_names)): # look through all the salon names
+        for j in range(len(salon_photos_names)): #look through all the salon names for the instagram photo
+            if (salon_names[i] == salon_photos_names[j]): # check if names are the same
+                show_photo_data[i] = 1 # if they're the same, then yes, show this photo
+                salon_datas[i].extend((salon_photos_datas[j]))
 
     #### Nearly done!!! ####
     # To deal with case 0, where things are bad and there are no photos, have to rely on other photos to supplement!
@@ -274,7 +298,7 @@ def recommendations():
     end_photo_list = []
     min_photos = 10
     # make more photos if in case 4 because that is when life is bad
-    if (case == 4):
+    if (show_photo_data == [0, 0, 0]):
         min_photos = 15
     number_of_photos = min(min_photos, sorted_merged_salon_insta_good_score.shape[0])
     indices = np.random.choice(sorted_merged_salon_insta_good_score.shape[0], size = number_of_photos, replace = False)
