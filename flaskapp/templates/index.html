@@ -11,7 +11,7 @@
 
  .main {
  background-color: rgba(255, 255, 255, 0.5);
- margin-top: 0px;
+ margin-top: 1px;
  padding-bottom: 50px;
  }
  .main h1 {
@@ -39,7 +39,7 @@
    background-image: url('/static/salon_bkg.jpg');
 
    /* Full height */
-   height: 20%;
+   height: 30%;
 
    /* Create the parallax scrolling effect */
    /*background-attachment: fixed; */
@@ -48,6 +48,9 @@
    background-size: cover;
 }
 
+.select {
+    font-size: medium;
+}
 
 .button {
   background-color: #555555;
@@ -66,6 +69,9 @@
 
 .button:hover {opacity: 1}
 
+select option{
+
+}
 
 </style>
 
@@ -76,24 +82,24 @@
 </div>
 
 
-<title>HairNet</title>
+<title>Hair For You</title>
 </head>
    <body>
 
     <div class="main">
       <div style="text-align:center">
-      <br><br><br>
       <div class="starter-template">
-        <h1>HairNet</h1>
-          <h2>"Never comb through reviews and Instagram again!"</h2>
+          <p>"Finding the perfect salon for your next haircut"</p>
       </div>
       <br>
       <div class="parallax"> </div>
 
+      <h2> Let me help you with your salon needs in Austin, Texas</h2>
+
       <h3>What is your current/desired hair color?</h3>
       <form action='/recommendations', method='POST'>
         <div class='button'>
-      <select name="hair_type" id="hair_type" class="selectpicker form-control" size = "1">
+      <select name="hair_type" id="hair_type" class="selectpicker form-control" size = "1" style='font-size: 24px'>
           <option value="blonde">blonde</option>
           <option value="brunette">brunette</option>
           <option value="black">black</option>
@@ -111,8 +117,8 @@
 
       <!-- This is what takes you to my next page recommender.html -->
       <h3>What is something you want from the salon?</h3>
-      <div class = "button"><input type="text" name="product" size = "20">
-      <input type="submit" value="Comb the HairNet!"> </div>
+      <div class = "button"><input type="text" name="product" size = "30" style='font-size: 24px' placeholder = 'ex: "parking" or "wedding"'>
+      <input type="submit" value="Comb the HairNet!" style='font-size: 24px'> </div>
       </form>
 
 
