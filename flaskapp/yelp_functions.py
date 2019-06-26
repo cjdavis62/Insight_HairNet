@@ -24,8 +24,9 @@ def parse_for_word(row, keyword):
     text = row["Review"]
     #print (text + "\n")
     average_sentiment = 0
-    for word in text.split(" "):
-        if keyword in word:
+    for word in text.split():
+        split = re.split('!|\.|\?|,|;', word)
+        if (keyword.lower() == split[0].lower()):
             has_keyword = 1
     if (has_keyword > 0):
         sentence_list, average_sentiment = get_sentences_with_word(text, keyword)
@@ -37,17 +38,27 @@ def parse_for_word(row, keyword):
 def get_sentences_with_word(text, keyword):
     average_sentiment = 0
     number_of_sentences = 0
+    sentiment = 0
     list_of_sentences = []
     #print(text)
     sentences = tokenize.sent_tokenize(text)
     for sentence in sentences:
-        #print (sentence)
-        if keyword in sentence:
+        has_keyword_flag = 0
+        for word in sentence.split():
+            split = re.split('!|\.|\?|,|;', word)
+            if (keyword.lower() == split[0].lower()):
+                has_keyword_flag = 1
+                break
+        if (has_keyword_flag == 1):
             list_of_sentences.append(sentence)
             number_of_sentences = number_of_sentences + 1
-            sentiment = get_sentiment(sentence)
-            #print(sentence, sentiment)
-    average_sentiment = float(sentiment / number_of_sentences)
+            sentiment = get_sentiment(sentence) + sentiment
+            #print(sentence, sentiment, row["sentiment_vader"])
+    if (number_of_sentences > 0):
+        average_sentiment = float(sentiment / number_of_sentences)
+    else:
+        average_sentiment = 0
+
     return list_of_sentences, average_sentiment
 
 def get_sentiment(text):

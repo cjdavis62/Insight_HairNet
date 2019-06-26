@@ -45,6 +45,12 @@ def recommendations():
 
     keyword = request.form['product'] # read in the request from the previous page
 
+    if " " in keyword:
+        error_message = ("error: keyword '%s' has multiple words! Please reduce to a single word!" %(keyword))
+        error_flag = 1 # input error
+        return render_template('error.html', error_message = error_message)
+
+
     # clean things up!
     reviews_data_from_sql = reviews_data_from_sql.drop(axis = 1, columns=["index"])
 
@@ -52,8 +58,9 @@ def recommendations():
     reviews_data_from_sql["has_keyword"], reviews_data_from_sql["sentence_list"], reviews_data_from_sql["average_sentiment_sentence"] = zip(*reviews_data_from_sql.apply(parse_for_word, keyword = keyword, axis=1))
     reviews_data_from_sql = reviews_data_from_sql[reviews_data_from_sql.has_keyword != 0]
     if reviews_data_from_sql.empty:
-        print ("error: no entries in reviews")
-        error_flag = 1
+        error_message = ("error: keyword '%s' does not appear in any reviews!" %(keyword))
+        error_flag = 1 # input error
+        return render_template('error.html', error_message = error_message)
 
     # reshape the values to sum+average over everything
     d = {'has_keyword':'has_keyword_sum', 'average_sentiment_sentence':'average_sentiment_sentence_average',
