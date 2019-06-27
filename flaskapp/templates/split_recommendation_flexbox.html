@@ -129,7 +129,7 @@ div.container {
   <article>
 
     <h2><center><font color="#D4AF37"> {{salon_highest_data[0] + " -- Score: " + salon_highest_data[2]|string}}</font></center></h2>
-    <p style="text-align:center">{{"Address: " + salon_highest_data[3] + " -- Yelp Rating: " + salon_highest_data[4] + " stars"}}
+    <p style="text-align:center">{{"Address: " + salon_highest_data[3] + " -- Yelp Rating: " + salon_highest_data[4]|string + " stars"}}
     {% if show_highest_services %}
     <p>{{"Services: " + salon_highest_data[5]}}</p>
     {% endif %}
@@ -152,7 +152,7 @@ div.container {
 
 
     <h2><center><font color="#48D1CC">{{salon_second_highest_data[0] + " -- Score: " + salon_second_highest_data[2]|string}}</font></center></h2>
-    <p style="text-align:center">{{"Address: " + salon_second_highest_data[3] + " -- Yelp Rating: " + salon_second_highest_data[4] + " stars"}}
+    <p style="text-align:center">{{"Address: " + salon_second_highest_data[3] + " -- Yelp Rating: " + salon_second_highest_data[4]|string + " stars"}}
     {% if show_second_highest_services %}
     <p>{{"Services: " + salon_second_highest_data[5]}}</p>
     {% endif %}
@@ -174,7 +174,7 @@ div.container {
     {% endif %}
 
     <h2><center><font color="#cd7f32">{{salon_third_highest_data[0] + " -- Score: " + salon_third_highest_data[2]|string}}</font></center></h2>
-    <p style="text-align:center">{{"Address: " + salon_third_highest_data[3] + " -- Yelp Rating: " + salon_third_highest_data[4] + " stars"}}
+    <p style="text-align:center">{{"Address: " + salon_third_highest_data[3] + " -- Yelp Rating: " + salon_third_highest_data[4]|string + " stars"}}
     {% if show_third_highest_services %}
     <p>{{"Services: " + salon_third_highest_data[5]}}</p>
     {% endif %}

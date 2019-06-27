@@ -53,7 +53,6 @@ def recommendations():
 
     # clean things up!
     reviews_data_from_sql = reviews_data_from_sql.drop(axis = 1, columns=["index"])
-
     # find out how often the value comes up!
     reviews_data_from_sql["has_keyword"], reviews_data_from_sql["sentence_list"], reviews_data_from_sql["average_sentiment_sentence"] = zip(*reviews_data_from_sql.apply(parse_for_word, keyword = keyword, axis=1))
     reviews_data_from_sql = reviews_data_from_sql[reviews_data_from_sql.has_keyword != 0]
@@ -169,6 +168,8 @@ def recommendations():
 
     insta_data_from_sql.drop(columns=["index"], inplace=True)
 
+    print(insta_data_from_sql.head())
+
     insta_data_from_sql = insta_data_from_sql[insta_data_from_sql.prediction == hair_type]
 
     # Find the highest scoring salons with instagram accounts
@@ -219,6 +220,9 @@ def recommendations():
     salon_hair_photos_second_highest_data = []
     salon_hair_photos_third_highest_data = []
 
+
+    print("testA", confidence_ranked_merged_salon_insta_hair_type_highest.iloc[0][2])
+    print("testB", confidence_ranked_merged_salon_insta_hair_type_highest.iloc[0][0])
 
     salon_hair_photos_highest_path = "/static/img/" + confidence_ranked_merged_salon_insta_hair_type_highest.iloc[0][2] + "/" + confidence_ranked_merged_salon_insta_hair_type_highest.iloc[0][0]
     salon_hair_photos_highest_confidence = confidence_ranked_merged_salon_insta_hair_type_highest.iloc[0][6]
@@ -323,11 +327,16 @@ def recommendations():
         return elem[3]
     end_photo_list.sort(key=takeFourth, reverse=True)
 
+    # fix hair type name for colored -> dyed
+    if hair_type == "colored":
+        hair_type = "dyed"
+
     #return the next page for the next step
     return render_template('split_recommendation_flexbox.html', hair_type = hair_type, keyword = keyword,
                            salon_highest_data = salon_highest_data, salon_second_highest_data = salon_second_highest_data, salon_third_highest_data = salon_third_highest_data,
                            show_photo_data = show_photo_data, show_highest_services = show_highest_services, show_second_highest_services = show_second_highest_services,
                            end_photo_list = end_photo_list)
+
 
 
 if __name__ == '__main__':
